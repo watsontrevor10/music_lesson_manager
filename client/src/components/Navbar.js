@@ -21,20 +21,20 @@ class Navbar extends React.Component {
     } else {
       return (
         <Header alignSelf='end'>
-          <Anchor href='/login'>
+          <Link to='/login'>
             <Button
               id='login'
               label='Login'
               active={location.pathname === '/login'}
             />
-          </Anchor>
-          <Anchor href='/register'>
+          </Link>
+          <Link to='/register'>
             <Button
               id='register'
               label='Register'
               active={location.pathname === '/register'}
             />
-          </Anchor>
+          </Link>
         </Header>
       )
     }
@@ -44,13 +44,13 @@ class Navbar extends React.Component {
     return (
       <div>
         <Header pointing secondary>
-          <Anchor href='/'>
+          <Link to='/'>
             <Button
               label='Home'
               id='home'
               active={this.props.location.pathname === '/'}
             />
-          </Anchor>
+          </Link>
             { this.rightNavItems() }
         </Header>
       </div>

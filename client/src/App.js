@@ -4,7 +4,6 @@ import NoMatch from './components/NoMatch';
 import Navbar from './components/Navbar';
 import Login from './components/Login';
 import Register from './components/Register';
-// import { Container, } from 'semantic-ui-react'
 import { Box } from 'grommet'
 import { Switch, Route, } from 'react-router-dom';
 import FetchUser from './components/FetchUser'

@@ -1,6 +1,6 @@
 import React from 'react';
 import { AuthConsumer, } from "../providers/AuthProvider";
-import { Button, Form, Segment, Header, } from 'semantic-ui-react';
+import { Button, Form, Heading, Box, TextInput } from 'grommet'
 
 class Register extends React.Component {
   state = { email: '', password: '', passwordConfirmation: '', };
@@ -25,10 +25,10 @@ class Register extends React.Component {
     const { email, password, passwordConfirmation, } = this.state;
     
     return (
-      <Segment basic>
-        <Header as='h1' textAlign='center'>Register</Header>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Input
+      <Box basic>
+        <Heading as='h1' textAlign='center'>Register</Heading>
+        <Form onSubmit={this.handleSubmit} margin='small'>
+          <TextInput
             label="Email"
             required
             autoFocus
@@ -37,7 +37,7 @@ class Register extends React.Component {
             placeholder='Email'
             onChange={this.handleChange}
           />
-          <Form.Input
+          <TextInput
             label="Password"
             required
             name='password'
@@ -46,7 +46,7 @@ class Register extends React.Component {
             type='password'
             onChange={this.handleChange}
           />
-          <Form.Input
+          <TextInput
             label="Password Confirmation"
             required
             name='passwordConfirmation'
@@ -55,11 +55,11 @@ class Register extends React.Component {
             type='password'
             onChange={this.handleChange}
           />
-          <Segment textAlign='center' basic>
+          <div textAlign='center' basic>
             <Button primary type='submit'>Submit</Button>
-          </Segment>
+          </div>
         </Form>
-      </Segment>
+      </Box>
     )
   }
 }
