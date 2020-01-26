@@ -56,7 +56,7 @@ class Register extends React.Component {
             onChange={this.handleChange}
           />
           <div textAlign='center' basic>
-            <Button primary type='submit'>Submit</Button>
+            <Button primary type='submit' label='Submit' />
           </div>
         </Form>
       </Box>

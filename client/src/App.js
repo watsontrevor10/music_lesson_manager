@@ -8,6 +8,7 @@ import { Box } from 'grommet'
 import { Switch, Route, } from 'react-router-dom';
 import FetchUser from './components/FetchUser'
 import ProtectedRoute from './components/ProtectedRoute'
+import StudioForm from './components/StudioForm'
 
 
 const App = () => (
@@ -17,6 +18,8 @@ const App = () => (
       <Box direction="row" pad='medium'>
         <Switch>
           <ProtectedRoute exact path="/" component={Home} />
+          <ProtectedRoute exact path="/new_studio" component={StudioForm} />
+
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route component={NoMatch} />

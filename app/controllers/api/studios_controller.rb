@@ -7,7 +7,7 @@ class Api::StudiosController < ApplicationController
   end
 
   def create
-    studio = current_user.studios.new(studio_params)
+    studio = Studio.new(studio_params)
     if studio.save
       render json: studio
     else

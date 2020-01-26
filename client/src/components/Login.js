@@ -44,7 +44,7 @@ class Login extends React.Component {
           />
           {/* <br/> */}
           <div textAlign='center' basic>
-            <Button primary type='submit' margin='small'>Submit</Button>
+            <Button primary type='submit' margin='small' label='Submit'/>
           </div>
         </Form>
       </Box>
