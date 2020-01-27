@@ -1,16 +1,13 @@
 import React from 'react'
-import { Form, FormField, TextInput, Button, Heading } from 'grommet'
+import { Form, FormField, Button, Heading } from 'grommet'
 import useFormInput from '../hooks/useFormInput'
 import axios from 'axios'
-import { Redirect } from 'react-router-dom'
-
 
 const StudioForm = (props) => {
   const { values, handleChange, handleSubmit } = useFormInput(submit)
   const { name } = values
 
   function submit() {
-    // debugger
     axios.post('/api/studios', {
       name: name,
     })

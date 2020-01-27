@@ -1,6 +1,6 @@
 import React from 'react'
 import { AuthConsumer, } from "../providers/AuthProvider";
-import { Header, Button, Anchor } from 'grommet'
+import { Header, Button } from 'grommet'
 import { Link, withRouter, } from 'react-router-dom'
 
 class Navbar extends React.Component {
