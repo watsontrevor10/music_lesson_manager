@@ -1,28 +1,24 @@
-import React from 'react'
-import { Form, FormField, Button, Heading } from 'grommet'
+import React, { useState } from 'react'
+import { Form, FormField, Button, Layer } from 'grommet'
 import useFormInput from '../hooks/useFormInput'
 import axios from 'axios'
 
 const StudioForm = (props) => {
-  const { values, handleChange, handleSubmit } = useFormInput(submit)
+  const { values, setValues, handleChange, handleSubmit } = useFormInput(submit)
   const { name } = values
 
   function submit() {
-    axios.post('/api/studios', {
-      name: name,
-    })
-      .then(res => {
-        props.history.push('/')
-      })
-      .catch(res => {
-        props.history.push('/')
-      } 
+    axios.post('/api/studios', {name: name})
+      .then(
+        props.toggleForm()
       )
   }
 
   return (
-    <div>
-      <Heading>Studio Name</Heading>
+    <Layer 
+      animation='fadeIn'
+    >
+      {/* <Heading>Studio Name</Heading> */}
       <Form onSubmit={handleSubmit}>
         <FormField 
           name='name'
@@ -32,7 +28,7 @@ const StudioForm = (props) => {
         /> 
         <Button primary type="submit" label='Submit' />
       </Form>
-    </div>
+    </Layer>
   )
 }
 

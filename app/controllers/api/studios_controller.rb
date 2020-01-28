@@ -3,11 +3,11 @@ class Api::StudiosController < ApplicationController
   before_action :set_studio, only: [:update]
 
   def index
-    render json: current_user.studios 
+    render json: current_user.studios.all
   end
 
   def create
-    studio = Studio.new(studio_params)
+    studio = current_user.studios.new(studio_params)
     if studio.save
       render json: studio
     else
