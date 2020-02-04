@@ -14,7 +14,7 @@ const App = () => (
   <Fragment>
     <Navbar />
     <FetchUser>
-      <Box direction="row" pad='medium'>
+      <Box pad='medium'>
         <Switch>
           <ProtectedRoute exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />

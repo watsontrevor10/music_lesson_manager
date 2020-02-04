@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { DataTable, Text, } from 'grommet'
+import { DataTable, Text, Box, } from 'grommet'
+import ContactForm from './ContactForm'
 
 const Contacts = (props) => {
   const [contacts, setContacts] = useState([])
@@ -14,8 +15,11 @@ const Contacts = (props) => {
 
   return (
     <>
-      <h3>Students</h3>
-      {/* {contacts.map(contact => ( */}
+      <Box>
+        <ContactForm />
+      </Box>
+      <Box direction='row-responsive'>
+        {/* <h3>Students</h3> */}
         <DataTable columns={[
           {
             property: 'first_name',
@@ -34,12 +38,9 @@ const Contacts = (props) => {
             header: 'Status',
           }
         ]}
-        data={contacts}
-        >
-          {/* <h4>{contact.first_name} {contact.last_name}</h4>
-          <p>{contact.email}</p> */}
-        </DataTable>
-        {/* ))} */}
+          data={contacts}
+        />
+      </Box>
     </>
   )
 }
