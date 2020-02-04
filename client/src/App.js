@@ -17,8 +17,6 @@ const App = () => (
       <Box direction="row" pad='medium'>
         <Switch>
           <ProtectedRoute exact path="/" component={Home} />
-          {/* <ProtectedRoute exact path="/new_studio" component={StudioForm} /> */}
-
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route component={NoMatch} />

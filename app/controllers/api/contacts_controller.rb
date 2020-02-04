@@ -1,4 +1,7 @@
 class Api::ContactsController < ApplicationController
+  before_action :set_studio
+  before_action :set_contact, only: [:show, :update, :destroy]
+
   def index
     render json: @studio.contacts
   end
@@ -35,7 +38,7 @@ class Api::ContactsController < ApplicationController
   end
 
   def set_studio
-    @studio = Studio.find(params[:id])
+    @studio = Studio.find(params[:studio_id])
   end
 
   def contact_params

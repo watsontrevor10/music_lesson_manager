@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Contacts from './Contacts'
 import StudioForm from './StudioForm';
-import { Heading, Box } from 'grommet'
+import { Heading, Header, Box, Grid } from 'grommet'
 
 const Home = () => {
   const [studioName, setStudioName] = useState([])
@@ -32,17 +32,29 @@ const Home = () => {
 
   return (
     <>
-      {showStudioForm()}
-      {studioName.map(name => (
-        <Heading>{name.name}</Heading>
-      ))}
-      <Box>
-        <Contacts studio={studioName} />
-      </Box>
+      <Grid
+        rows={['small', 'small']}
+        columns={['small', 'small']}
+        gap='xsmall'
+        areas={[
+          { name: 'header', start: [0, 0], end: [1, 0] },
+          { name: 'contacts', start: [0, 1], end: [0, 1] },
+        ]}
+      >
+        <Box gridArea='header'>
+          <Header alignSelf='center'>
+            {showStudioForm()}
+            {studioName.map(name => (
+              <Heading>{name.name}</Heading>
+            ))}
+          </Header>
+        </Box>
+        <Box gridArea='contacts' direction='row' pad='small'>
+          <Contacts studio={studioName} />
+        </Box>
+      </Grid>
     </>
   )
-
 }
-
 
 export default Home;
