@@ -21,6 +21,7 @@ const useFormInput = callback => {
   }
 
   const handleChange = (e, drop) => {
+    // debugger
     let name = drop ? drop : e.target.name
     let value = drop ? e : e.target.value
     setValues(values => ({ ...values, [name]: value }))

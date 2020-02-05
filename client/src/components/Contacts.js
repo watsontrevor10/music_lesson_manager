@@ -15,11 +15,7 @@ const Contacts = (props) => {
 
   return (
     <>
-      <Box>
-        <ContactForm />
-      </Box>
       <Box direction='row-responsive'>
-        {/* <h3>Students</h3> */}
         <DataTable columns={[
           {
             property: 'first_name',
