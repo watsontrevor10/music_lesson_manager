@@ -4,9 +4,9 @@ import useFormInput from '../hooks/useFormInput'
 import { Box, Button, Form, FormField, Grid, Select } from 'grommet'
 
 const ContactForm = (props) => {
-  const { values, setValues, handleChange, handleSubmit } = useFormInput(submit)
+  const { values, setValues, handleChange, handleSubmit, handleSelects } = useFormInput(submit)
   const statusOptions = ['Current', 'Potential', 'Former']
-  const [initStatus, setInitStatus] = useState('')
+  // const [status, setStatus] = useState('')
   // const [firstName, setFirstName] = useState('')
   // const [lastName, setLastName] = useState('')
   // const [phone, setPhone] = useState('')
@@ -30,7 +30,7 @@ const ContactForm = (props) => {
   } = values
 
   function submit() {
-    axios.post('/api/studios', {
+    axios.post(`/api/studios/${props.id}/contacts`, {
       first_name: first_name,
       last_name: last_name,
       phone: phone,
@@ -43,9 +43,23 @@ const ContactForm = (props) => {
       description: description,
     })
       .then(
-        // props.toggleForm()
+        props.toggleForm()
       )
   }
+
+  // const handleChange = (e) => {
+  //   e.preventDefault()
+  //   setFirstName(e.target.value)
+  //   setLastName(e.target.value)
+  //   setPhone(e.target.value)
+  //   setEmail(e.target.value)
+  //   setAge(e.target.value)
+  //   setBirthdate(e.target.value)
+  //   setParentName(e.target.value)
+  //   setStatus(e.target.value)
+  //   setType(e.target.value)
+  //   setDescription(e.target.value)
+  // }
 
   return (
     <>
@@ -97,21 +111,24 @@ const ContactForm = (props) => {
                 id='select'
                 name='status'
                 required
-                value={initStatus}
-                onChange={event => {setInitStatus(event.value)}}
+                value={status}
+                onChange={handleSelects}
                 options={statusOptions}
+              />
+            </FormField>
+            <FormField label='Type' htmlFor='select'>
+              <Select
+                label='Type'
+                name='type'
+                value={type}
+                required
+                options={['Student', 'Babysitter']}
+                onChange={handleSelects}
               />
             </FormField>
             <FormField
               label='Parent Name'
               name='parent_name'
-              onChange={handleChange}
-            />
-            <Select
-              label='Type'
-              name='type'
-              required
-              options={['Student', 'Babysitter']}
               onChange={handleChange}
             />
           </Box>

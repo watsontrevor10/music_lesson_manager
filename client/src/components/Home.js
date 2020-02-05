@@ -55,7 +55,7 @@ const Home = () => {
             label='Add Contact'
             onClick={toggleContactForm}
           />
-          {showContactForm ? <ContactForm /> : <Contacts studio={studioName} />}
+          {showContactForm ? <ContactForm toggleForm={toggleContactForm} id={studioName.id} /> : <Contacts studio={studioName} />}
         </Box>
       </Grid>
     </>
