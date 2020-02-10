@@ -7,6 +7,7 @@ import Contact from './Contact'
 const Contacts = (props) => {
   const [contacts, setContacts] = useState([])
   const [showContactForm, setShowContactForm] = useState(false)
+  const [showContact, setShowContact] = useState(false)
 
   useEffect(() => {
     axios.get(`/api/studios/${props.studio.id}/contacts`)
@@ -27,8 +28,19 @@ const Contacts = (props) => {
     setShowContactForm(!showContactForm)
   }
 
+  const closeContactComp = () => {
+    setShowContact(false)
+  }
+
+  const toggleContactComp = (e) => {
+    setShowContact(!showContact)
+    // event => JSON.stringify(event.datum, null, 2))
+  }
+
   return (
     <>
+      {showContact &&
+        <Contact contact={event => JSON.stringify(event.datum, null, 2)} close={closeContactComp} />}
       {showContactForm ?
         <ContactForm toggleForm={toggleContactForm} studio={props.studio} add={handleRefreshContacts} />
         :
@@ -45,11 +57,11 @@ const Contacts = (props) => {
             <DataTable key={contacts.id} columns={[
               {
                 property: 'first_name',
-                header: <Text>First Name</Text>,
+                header: 'First Name',
               },
               {
                 property: 'last_name',
-                header: <Text>Last Name</Text>,
+                header: 'Last Name',
               },
               {
                 property: 'email',
@@ -65,7 +77,7 @@ const Contacts = (props) => {
               }
             ]}
               data={contacts}
-              onClickRow={event => alert(JSON.stringify(event.datum, null, 2))}
+              onClickRow={e => toggleContactComp(e)}
             />
           </Box>
         </Box>
