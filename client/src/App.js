@@ -1,4 +1,5 @@
 import React, { Fragment, } from 'react';
+import Contacts from './components/Contacts'
 import Home from './components/Home'
 import NoMatch from './components/NoMatch';
 import Navbar from './components/Navbar';
@@ -8,7 +9,6 @@ import { Box } from 'grommet'
 import { Switch, Route, } from 'react-router-dom';
 import FetchUser from './components/FetchUser'
 import ProtectedRoute from './components/ProtectedRoute'
-// import StudioForm from './components/StudioForm'
 
 const App = () => (
   <Fragment>
@@ -17,6 +17,7 @@ const App = () => (
       <Box pad='medium'>
         <Switch>
           <ProtectedRoute exact path="/" component={Home} />
+          <ProtectedRoute exact path="/:studio_id/contacts" component={Contacts} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route component={NoMatch} />

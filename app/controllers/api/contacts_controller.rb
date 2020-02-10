@@ -7,11 +7,11 @@ class Api::ContactsController < ApplicationController
   end
 
   def show
-    render json: @studio.contact.find(contact_params)
+    render json: @studio.contacts.find(contact_params)
   end
 
   def create
-    contact = @studio.contact.new(contact_params)
+    contact = @studio.contacts.new(contact_params)
     if contact.save
       render json: contact
     else
@@ -51,8 +51,8 @@ class Api::ContactsController < ApplicationController
         :age, 
         :birthdate, 
         :parent_name, 
-        :status, 
-        :type, 
+        :contact_status, 
+        :contact_type, 
         :description
       ])
   end

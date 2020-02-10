@@ -1,8 +1,8 @@
 import React from 'react';
 import { AuthConsumer, } from "../providers/AuthProvider";
 import { Button, Form, Heading, Box, TextInput, FormField, Layer } from 'grommet'
-import axios from 'axios'
-import StudioForm from './StudioForm'
+// import axios from 'axios'
+// import StudioForm from './StudioForm'
 
 class Register extends React.Component {
   state = { email: '', password: '', passwordConfirmation: '', studio_name: '' };

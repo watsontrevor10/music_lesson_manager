@@ -6,6 +6,10 @@ class Api::StudiosController < ApplicationController
     render json: current_user.studios.all
   end
 
+  def show
+    render json: @first_studio
+  end
+
   def create
     studio = current_user.studios.new(studio_params)
     if studio.save
@@ -27,6 +31,10 @@ class Api::StudiosController < ApplicationController
 
   def set_studio
     @studio = Studio.find(params[:id])
+  end
+
+  def first_studio
+    @first_studio = Studio.first
   end
 
   def studio_params

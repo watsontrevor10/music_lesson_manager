@@ -3,29 +3,22 @@ import axios from 'axios';
 import Contacts from './Contacts'
 import ContactForm from './ContactForm'
 import StudioForm from './StudioForm'
-import { Heading, Header, Box, Grid, Button, } from 'grommet'
+import { Heading, Header, Box, Grid, Button, Select } from 'grommet'
 
 const Home = () => {
   const [studioName, setStudioName] = useState([])
+  const [currentStudio, setCurrentStudio] = useState(studioName[0])
   const [showForm, setShowForm] = useState(false)
-  const [showContactForm, setShowContactForm] = useState(false)
 
   useEffect(() => {
     axios.get('/api/studios')
       .then(res => {
         setStudioName(res.data)
-        if (res.data.length < 1) {
-          toggleForm()
-        }
       })
   }, [])
 
   const toggleForm = () => {
     setShowForm(!showForm)
-  }
-
-  const toggleContactForm = () => {
-    setShowContactForm(!showContactForm)
   }
 
   const showStudioForm = () => {
@@ -36,26 +29,38 @@ const Home = () => {
     }
   }
 
+  const studioValues = studioName.map(name => (
+    name.name
+  ))
+
+  const displayContacts = () => {
+    if (studioName.length > 0) {
+      return (
+        <Contacts studio={studioName[0]} />
+      )
+    }
+  }
+
   return (
     <>
       <Box border>
         <Header alignSelf='center'>
           {showStudioForm()}
-          {studioName.map(name => (
-            <Heading>{name.name}</Heading>
-          ))}
+          <Select
+            options={studioValues}
+            value={currentStudio}
+            defaultValue={currentStudio}
+            onChange={event => setCurrentStudio(event.value)}
+          />
+
         </Header>
       </Box>
       <Grid
         columns={{ count: 2, size: 'auto' }}
         gap='small'
       >
-        <Box pad='small' border>
-          <Button
-            label='Add Contact'
-            onClick={toggleContactForm}
-          />
-          {showContactForm ? <ContactForm toggleForm={toggleContactForm} id={studioName.id} /> : <Contacts studio={studioName} />}
+        <Box pad='medium' border>
+          {displayContacts()}
         </Box>
       </Grid>
     </>

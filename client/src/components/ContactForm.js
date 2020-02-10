@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import axios from 'axios'
 import useFormInput from '../hooks/useFormInput'
 import { Box, Button, Form, FormField, Grid, Select } from 'grommet'
@@ -6,16 +6,7 @@ import { Box, Button, Form, FormField, Grid, Select } from 'grommet'
 const ContactForm = (props) => {
   const { values, setValues, handleChange, handleSubmit, handleSelects } = useFormInput(submit)
   const statusOptions = ['Current', 'Potential', 'Former']
-  // const [status, setStatus] = useState('')
-  // const [firstName, setFirstName] = useState('')
-  // const [lastName, setLastName] = useState('')
-  // const [phone, setPhone] = useState('')
-  // const [email, setEmail] = useState('')
-  // const [age, setAge] = useState('')
-  // const [birthdate, setBirthdate] = useState('')
-  // const [parentName, setParentName] = useState('')
-  // const [type, setType] = useState('')
-  // const [description, setDescription] = useState('')
+
   const {
     first_name,
     last_name,
@@ -24,13 +15,13 @@ const ContactForm = (props) => {
     age,
     birthdate,
     parent_name,
-    type,
-    status,
+    contact_type,
+    contact_status,
     description,
   } = values
 
   function submit() {
-    axios.post(`/api/studios/${props.id}/contacts`, {
+    axios.post(`/api/studios/${props.studio.id}/contacts`, {
       first_name: first_name,
       last_name: last_name,
       phone: phone,
@@ -38,28 +29,14 @@ const ContactForm = (props) => {
       age: age,
       birthdate: birthdate,
       parent_name: parent_name,
-      status: status,
-      type: type,
+      contact_status: contact_status,
+      contact_type: contact_type,
       description: description,
     })
       .then(
         props.toggleForm()
       )
   }
-
-  // const handleChange = (e) => {
-  //   e.preventDefault()
-  //   setFirstName(e.target.value)
-  //   setLastName(e.target.value)
-  //   setPhone(e.target.value)
-  //   setEmail(e.target.value)
-  //   setAge(e.target.value)
-  //   setBirthdate(e.target.value)
-  //   setParentName(e.target.value)
-  //   setStatus(e.target.value)
-  //   setType(e.target.value)
-  //   setDescription(e.target.value)
-  // }
 
   return (
     <>
@@ -109,9 +86,9 @@ const ContactForm = (props) => {
             <FormField label='Status' htmlFor='select'>
               <Select
                 id='select'
-                name='status'
+                name='contact_status'
                 required
-                value={status}
+                value={contact_status}
                 onChange={handleSelects}
                 options={statusOptions}
               />
@@ -119,8 +96,8 @@ const ContactForm = (props) => {
             <FormField label='Type' htmlFor='select'>
               <Select
                 label='Type'
-                name='type'
-                value={type}
+                name='contact_type'
+                value={contact_type}
                 required
                 options={['Student', 'Babysitter']}
                 onChange={handleSelects}
@@ -137,6 +114,10 @@ const ContactForm = (props) => {
           label="Submit"
           type='submit'
           value='submit'
+        />
+        <Button
+          label="Cancel"
+          onClick={() => props.toggleForm()}
         />
       </Form>
     </>

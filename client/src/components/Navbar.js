@@ -4,10 +4,10 @@ import { Header, Button } from 'grommet'
 import { Link, withRouter, } from 'react-router-dom'
 
 class Navbar extends React.Component {
-  
+
   rightNavItems = () => {
     const { auth: { user, handleLogout, }, location, } = this.props;
-    
+
     if (user) {
       return (
         <Header alignSelf='end'>
@@ -20,7 +20,7 @@ class Navbar extends React.Component {
       )
     } else {
       return (
-        <Header alignSelf='end'>
+        <Header alignSelf='start'>
           <Link to='/login'>
             <Button
               id='login'
@@ -49,6 +49,13 @@ class Navbar extends React.Component {
               label='Home'
               id='home'
               active={this.props.location.pathname === '/'}
+            />
+          </Link>
+          <Link to='/contacts'>
+            <Button
+              label='Contacts'
+              id='contacts'
+              active={this.props.location.pathname === '/contacts'}
             />
           </Link>
             { this.rightNavItems() }
