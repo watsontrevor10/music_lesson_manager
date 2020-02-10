@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import Contacts from './Contacts'
-import ContactForm from './ContactForm'
 import StudioForm from './StudioForm'
-import { Heading, Header, Box, Grid, Button, Select } from 'grommet'
+import { Header, Box, Grid, Select } from 'grommet'
 
 const Home = () => {
   const [studioName, setStudioName] = useState([])
@@ -14,6 +13,7 @@ const Home = () => {
     axios.get('/api/studios')
       .then(res => {
         setStudioName(res.data)
+        setCurrentStudio(studioName[0])
       })
   }, [])
 
@@ -48,9 +48,8 @@ const Home = () => {
           {showStudioForm()}
           <Select
             options={studioValues}
-            value={currentStudio}
-            defaultValue={currentStudio}
-            onChange={event => setCurrentStudio(event.value)}
+            value={studioValues}
+            onChange={event => setCurrentStudio(event.target.value)}
           />
 
         </Header>

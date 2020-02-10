@@ -34,7 +34,7 @@ const ContactForm = (props) => {
       description: description,
     })
       .then(
-        props.toggleForm()
+        props.add()
       )
   }
 
