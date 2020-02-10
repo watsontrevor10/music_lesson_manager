@@ -18,7 +18,7 @@ const App = () => (
       <Box pad='medium'>
         <Switch>
           <ProtectedRoute exact path="/" component={Home} />
-          <ProtectedRoute exact path="/:studio_id/contacts" component={Contacts} />
+          {/* <ProtectedRoute exact path="/contacts" component={Contacts} /> */}
           <ProtectedRoute exact path="/:studio_id/contacts/:contact_id" component={Contact} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />

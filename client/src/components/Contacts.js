@@ -34,6 +34,7 @@ const Contacts = (props) => {
 
   const toggleContactComp = (e) => {
     setShowContact(!showContact)
+
     // event => JSON.stringify(event.datum, null, 2))
   }
 
