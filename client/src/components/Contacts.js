@@ -6,11 +6,12 @@ import Contact from './Contact'
 
 const Contacts = (props) => {
   const [contacts, setContacts] = useState([])
+  const [contact, setContact] = useState({})
   const [showContactForm, setShowContactForm] = useState(false)
   const [showContact, setShowContact] = useState(false)
 
   useEffect(() => {
-    axios.get(`/api/studios/${props.studio.id}/contacts`)
+    axios.get(`/api/studios/${props.match.params.studio_id}/contacts`)
       .then(res => {
         setContacts(res.data)
       })
@@ -28,20 +29,15 @@ const Contacts = (props) => {
     setShowContactForm(!showContactForm)
   }
 
-  const closeContactComp = () => {
-    setShowContact(false)
-  }
-
   const toggleContactComp = (e) => {
     setShowContact(!showContact)
-
     // event => JSON.stringify(event.datum, null, 2))
   }
 
   return (
     <>
       {showContact &&
-        <Contact contact={event => JSON.stringify(event.datum, null, 2)} close={closeContactComp} />}
+        <Contact contact={contact} close={toggleContactComp} />}
       {showContactForm ?
         <ContactForm toggleForm={toggleContactForm} studio={props.studio} add={handleRefreshContacts} />
         :
@@ -78,7 +74,7 @@ const Contacts = (props) => {
               }
             ]}
               data={contacts}
-              onClickRow={e => toggleContactComp(e)}
+              onClickRow={event => setContact(event.datum), () => toggleContactComp()}
             />
           </Box>
         </Box>

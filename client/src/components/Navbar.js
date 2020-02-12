@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState, } from 'react'
+import axios from 'axios'
 import { AuthConsumer, } from "../providers/AuthProvider";
 import { Header, Button } from 'grommet'
 import { Link, withRouter, } from 'react-router-dom'
 
-class Navbar extends React.Component {
+const Navbar = (props) => {
 
-  rightNavItems = () => {
-    const { auth: { user, handleLogout, }, location, } = this.props;
+  const rightNavItems = () => {
+    const { auth: { user, handleLogout, }, location, } = props;
 
     if (user) {
       return (
@@ -14,7 +15,7 @@ class Navbar extends React.Component {
           <Button
             id='logout'
             label='Logout'
-            onClick={ () => handleLogout(this.props.history) }
+            onClick={ () => handleLogout(props.history) }
           />
         </Header>
       )
@@ -40,7 +41,6 @@ class Navbar extends React.Component {
     }
   }
   
-  render() {
     return (
       <div>
         <Header pointing secondary>
@@ -48,33 +48,30 @@ class Navbar extends React.Component {
             <Button
               label='Home'
               id='home'
-              active={this.props.location.pathname === '/'}
+              active={props.location.pathname === '/'}
             />
           </Link>
-          {/* <Link to='/contacts'>
+          <Link to='/22/contacts'>
             <Button
               label='Contacts'
               id='contacts'
-              active={this.props.location.pathname === '/contacts'}
+              active={props.location.pathname === '/22/contacts'}
             />
-          </Link> */}
-            { this.rightNavItems() }
+          </Link>
+            { rightNavItems() }
         </Header>
       </div>
     )
-  }
 }
 
-export class ConnectedNavbar extends React.Component {
-  render() {
+const ConnectedNavbar = (props) => {
     return (
       <AuthConsumer> 
         { auth => 
-          <Navbar { ...this.props } auth={auth} />
+          <Navbar { ...props } auth={auth} />
         }
       </AuthConsumer>
     )
-  }
 }
 
 export default withRouter(ConnectedNavbar);
