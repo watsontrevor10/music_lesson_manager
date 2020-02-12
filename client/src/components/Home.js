@@ -46,11 +46,11 @@ const Home = () => {
       <Box border>
         <Header alignSelf='center'>
           {showStudioForm()}
-          <Select
+          {/* <Select
             options={studioValues}
             value={studioValues}
             onChange={event => setCurrentStudio(event.target.value)}
-          />
+          /> */}
 
         </Header>
       </Box>

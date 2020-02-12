@@ -21,8 +21,8 @@ const App = () => {
     <FetchUser>
       <Box pad='medium'>
         <Switch>
-          <ProtectedRoute exact path="/" component={Studios} />
-          <ProtectedRoute exact path='/:studio_id' component={Home} />
+          <ProtectedRoute exact path="/" component={Home} />
+          {/* <ProtectedRoute exact path='/:studio_id' component={Home} /> */}
           <ProtectedRoute exact path="/:studio_id/contacts" component={Contacts} />
           <ProtectedRoute exact path="/:studio_id/contacts/:contact_id" component={Contact} />
           <Route exact path="/login" component={Login} />

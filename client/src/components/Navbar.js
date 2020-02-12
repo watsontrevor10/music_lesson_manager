@@ -8,6 +8,7 @@ const Navbar = (props) => {
 
   const rightNavItems = () => {
     const { auth: { user, handleLogout, }, location, } = props;
+    
 
     if (user) {
       return (
@@ -51,13 +52,13 @@ const Navbar = (props) => {
               active={props.location.pathname === '/'}
             />
           </Link>
-          <Link to='/22/contacts'>
+          {/* <Link to='/22/contacts'>
             <Button
               label='Contacts'
               id='contacts'
               active={props.location.pathname === '/22/contacts'}
             />
-          </Link>
+          </Link> */}
             { rightNavItems() }
         </Header>
       </div>
@@ -65,6 +66,19 @@ const Navbar = (props) => {
 }
 
 const ConnectedNavbar = (props) => {
+  const [studios, setStudios] = useState([])
+
+    useEffect(() => {
+      async function getStudios() {
+        await axios.get('/api/studios')
+          .then(res => {
+            setStudios(res.data)
+            // setCurrentStudio(studios[0])
+          })
+      }
+      getStudios()
+    }, [])
+
     return (
       <AuthConsumer> 
         { auth => 
