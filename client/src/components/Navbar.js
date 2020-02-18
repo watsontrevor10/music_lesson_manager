@@ -8,7 +8,6 @@ const Navbar = (props) => {
   const rightNavItems = () => {
     const { auth: { user, handleLogout, }, location, } = props;
 
-
     if (user) {
       return (
         <Header alignSelf='end'>
