@@ -11,11 +11,12 @@ class Api::ExpensesController < ApplicationController
   end
 
   def create
-    expense = current_user.expense.new(expense_params)
+    expense = current_user.expenses.new(expense_params)
+    binding.pry
     if expense.save
-      render json: contact
+      render json: expense
     else
-      render json: contact.errors, status: 422
+      render json: expense.errors, status: 422
     end
   end
 
