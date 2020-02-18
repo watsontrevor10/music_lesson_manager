@@ -9,6 +9,7 @@ import { Box } from 'grommet'
 import { Switch, Route, } from 'react-router-dom'
 import FetchUser from './components/FetchUser'
 import ProtectedRoute from './components/ProtectedRoute'
+import Expenses from './components/Expenses'
 
 const App = () => {
 
@@ -20,6 +21,7 @@ const App = () => {
           <Switch>
             <ProtectedRoute exact path="/" component={Home} />
             <ProtectedRoute exact path="/contacts" component={Contacts} />
+            <ProtectedRoute exact path="/expenses" component={Expenses} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route component={NoMatch} />

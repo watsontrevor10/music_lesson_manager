@@ -57,6 +57,13 @@ const Navbar = (props) => {
             active={props.location.pathname === '/contacts'}
           />
         </Link>
+        <Link to='/expenses'>
+          <Button
+            label='Expenses'
+            id='expenses'
+            active={props.location.pathname === '/expenses'}
+          />
+        </Link>
         {rightNavItems()}
       </Header>
     </div>
