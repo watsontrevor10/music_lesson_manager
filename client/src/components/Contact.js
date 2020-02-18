@@ -7,7 +7,7 @@ const Contact = (props) => {
     <>
       <Layer position='center' modal onClickOutside={props.close} onEsc={props.close}>
         <Box gap='small' pad='small'>
-          <Heading level={3}>{props.first_name} {props.last_name} Test</Heading>
+          <Heading level={3}>{props.contact.first_name} {props.contact.last_name} Test</Heading>
         </Box>
       </Layer>
     </>

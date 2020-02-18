@@ -8,10 +8,9 @@ class CreateContacts < ActiveRecord::Migration[6.0]
       t.integer :age
       t.date :birthdate
       t.string :parent_name
-      t.string :status
-      t.string :type
+      t.string :contact_status
+      t.string :contact_type
       t.text :description
-      t.belongs_to :studio, foreign_key: true
 
       t.timestamps
     end

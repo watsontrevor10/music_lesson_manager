@@ -2,24 +2,33 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Heading, DataTable, Text, Box, Button, } from 'grommet'
 import ContactForm from './ContactForm'
-import Contact from './Contact'
 
-const Contacts = (props) => {
+const Contacts = () => {
   const [contacts, setContacts] = useState([])
+  const [contact, setContact] = useState(null)
   const [showContactForm, setShowContactForm] = useState(false)
-  const [showContact, setShowContact] = useState(false)
 
   useEffect(() => {
-    axios.get(`/api/studios/${props.studio.id}/contacts`)
+    axios.get(`/api/contacts`)
       .then(res => {
         setContacts(res.data)
+        setContact(null)
       })
   }, [])
 
   const handleRefreshContacts = () => {
-    axios.get(`/api/studios/${props.studio.id}/contacts`)
+    axios.get(`/api/contacts`)
       .then(res => {
         setContacts(res.data)
+        setContact(null)
+        toggleContactForm()
+      })
+  }
+
+  const handleDelete = () => {
+    axios.delete(`/api/contacts/${contact.id}`)
+      .then(res => {
+        setContacts(contacts.filter(c => c.id !== contact.id))
         toggleContactForm()
       })
   }
@@ -28,22 +37,15 @@ const Contacts = (props) => {
     setShowContactForm(!showContactForm)
   }
 
-  const closeContactComp = () => {
-    setShowContact(false)
-  }
-
   const toggleContactComp = (e) => {
-    setShowContact(!showContact)
-
-    // event => JSON.stringify(event.datum, null, 2))
+    setContact(e)
+    setShowContactForm(!showContactForm)
   }
 
   return (
     <>
-      {showContact &&
-        <Contact contact={event => JSON.stringify(event.datum, null, 2)} close={closeContactComp} />}
       {showContactForm ?
-        <ContactForm toggleForm={toggleContactForm} studio={props.studio} add={handleRefreshContacts} />
+        <ContactForm toggleForm={toggleContactForm} add={handleRefreshContacts} delete={handleDelete} contact={contact} />
         :
         <Box>
           <Heading level={3}>Contacts</Heading>
@@ -75,10 +77,14 @@ const Contacts = (props) => {
               {
                 property: 'contact_status',
                 header: 'Status',
+              },
+              {
+                property: 'contact_type',
+                header: 'Type',
               }
             ]}
               data={contacts}
-              onClickRow={e => toggleContactComp(e)}
+              onClickRow={event => toggleContactComp(event.datum)}
             />
           </Box>
         </Box>
