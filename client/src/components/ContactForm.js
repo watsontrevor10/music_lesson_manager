@@ -30,13 +30,13 @@ const ContactForm = (props) => {
   function submit() {
     const newContact = { first_name, last_name, phone, email, age, birthdate, parent_name, contact_status, contact_type, description }
     if (contact) {
-      axios.patch(`/api/studios/${props.studio.id}/contacts/${contact.id}`, newContact)
+      axios.patch(`/api/contacts/${contact.id}`, newContact)
       .then( res => {
         setContact(res.data)
         props.add()
       })
     } else {
-      axios.post(`/api/studios/${props.studio.id}/contacts`, newContact)
+      axios.post(`/api/contacts`, newContact)
         .then(
           props.add()
         )

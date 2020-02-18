@@ -1,5 +1,4 @@
-import React, { useEffect, useState, } from 'react'
-import axios from 'axios'
+import React from 'react'
 import { AuthConsumer, } from "../providers/AuthProvider";
 import { Header, Button } from 'grommet'
 import { Link, withRouter, } from 'react-router-dom'
@@ -8,7 +7,7 @@ const Navbar = (props) => {
 
   const rightNavItems = () => {
     const { auth: { user, handleLogout, }, location, } = props;
-    
+
 
     if (user) {
       return (
@@ -16,7 +15,7 @@ const Navbar = (props) => {
           <Button
             id='logout'
             label='Logout'
-            onClick={ () => handleLogout(props.history) }
+            onClick={() => handleLogout(props.history)}
           />
         </Header>
       )
@@ -41,51 +40,39 @@ const Navbar = (props) => {
       )
     }
   }
-  
-    return (
-      <div>
-        <Header pointing secondary>
-          <Link to='/'>
-            <Button
-              label='Home'
-              id='home'
-              active={props.location.pathname === '/'}
-            />
-          </Link>
-          {/* <Link to='/22/contacts'>
-            <Button
-              label='Contacts'
-              id='contacts'
-              active={props.location.pathname === '/22/contacts'}
-            />
-          </Link> */}
-            { rightNavItems() }
-        </Header>
-      </div>
-    )
+
+  return (
+    <div>
+      <Header pointing secondary>
+        <Link to='/'>
+          <Button
+            label='Home'
+            id='home'
+            active={props.location.pathname === '/'}
+          />
+        </Link>
+        <Link to='/contacts'>
+          <Button
+            label='Contacts'
+            id='contacts'
+            active={props.location.pathname === '/contacts'}
+          />
+        </Link>
+        {rightNavItems()}
+      </Header>
+    </div>
+  )
 }
 
 const ConnectedNavbar = (props) => {
-  const [studios, setStudios] = useState([])
 
-    useEffect(() => {
-      async function getStudios() {
-        await axios.get('/api/studios')
-          .then(res => {
-            setStudios(res.data)
-            // setCurrentStudio(studios[0])
-          })
+  return (
+    <AuthConsumer>
+      {auth =>
+        <Navbar {...props} auth={auth} />
       }
-      getStudios()
-    }, [])
-
-    return (
-      <AuthConsumer> 
-        { auth => 
-          <Navbar { ...props } auth={auth} />
-        }
-      </AuthConsumer>
-    )
+    </AuthConsumer>
+  )
 }
 
 export default withRouter(ConnectedNavbar);

@@ -6,19 +6,19 @@ import Contact from './Contact'
 
 const Contacts = (props) => {
   const [contacts, setContacts] = useState([])
-  const [contact, setContact] = useState({})
+  const [contact, setContact] = useState(null)
   const [showContactForm, setShowContactForm] = useState(false)
   const [showContact, setShowContact] = useState(false)
 
   useEffect(() => {
-    axios.get(`/api/studios/${props.studio.id}/contacts`)
+    axios.get(`/api/contacts`)
       .then(res => {
         setContacts(res.data)
       })
   }, [])
 
   const handleRefreshContacts = () => {
-    axios.get(`/api/studios/${props.studio.id}/contacts`)
+    axios.get(`/api/contacts`)
       .then(res => {
         setContacts(res.data)
         toggleContactForm()
@@ -37,7 +37,7 @@ const Contacts = (props) => {
   return (
     <>
       {showContactForm ?
-        <ContactForm toggleForm={toggleContactForm} studio={props.studio} add={handleRefreshContacts} contact={contact} />
+        <ContactForm toggleForm={toggleContactForm} add={handleRefreshContacts} contact={contact} />
         :
         <Box>
           <Heading level={3}>Contacts</Heading>
