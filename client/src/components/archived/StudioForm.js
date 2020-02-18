@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Form, FormField, Button, Layer } from 'grommet'
-import useFormInput from '../hooks/useFormInput'
+import useFormInput from '../../hooks/useFormInput'
 import axios from 'axios'
 
 const StudioForm = (props) => {

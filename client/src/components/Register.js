@@ -1,8 +1,6 @@
 import React from 'react';
 import { AuthConsumer, } from "../providers/AuthProvider";
-import { Button, Form, Heading, Box, TextInput, FormField, Layer } from 'grommet'
-// import axios from 'axios'
-// import StudioForm from './StudioForm'
+import { Button, Form, Heading, Box, TextInput, FormField } from 'grommet'
 
 class Register extends React.Component {
   state = { email: '', password: '', passwordConfirmation: '', studio_name: '' };
@@ -23,24 +21,8 @@ class Register extends React.Component {
     this.setState({ [name]: value, });
   }
 
-  // newStudioForm = () => {
-  //   const { studio_name } = this.state
-  //   axios.post('/api/studios', {
-  //     name: studio_name,
-  //   })
-  //     .then(res => {
-  //       this.setState({ studio_name: studio_name })
-  //       // props.history.push('/')
-  //     })
-  //     .catch(res => {
-  //       // props.history.push('/')
-  //     }
-  //     )
-  // }
-
-
   render() {
-    const { email, password, passwordConfirmation, studio_name } = this.state;
+    const { email, password, passwordConfirmation, } = this.state;
 
     return (
       <Box basic>
@@ -79,16 +61,7 @@ class Register extends React.Component {
               onChange={this.handleChange}
             />
           </FormField>
-          {/* <FormField>
-            <TextInput
-              label="Studio Name"
-              placeholder="Studio Name"
-              required
-              name='studio_name'
-              value={studio_name}
-              onChange={this.handleChange}
-            />
-          </FormField> */}
+          
           <Button primary type='submit' label='Submit' />
         </Form>
       </Box>
