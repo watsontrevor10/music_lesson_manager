@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_05_221910) do
+ActiveRecord::Schema.define(version: 2020_02_17_193902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,18 +26,10 @@ ActiveRecord::Schema.define(version: 2020_02_05_221910) do
     t.string "contact_status"
     t.string "contact_type"
     t.text "description"
-    t.bigint "studio_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["studio_id"], name: "index_contacts_on_studio_id"
-  end
-
-  create_table "studios", force: :cascade do |t|
-    t.string "name"
     t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_studios_on_user_id"
+    t.index ["user_id"], name: "index_contacts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -70,6 +62,5 @@ ActiveRecord::Schema.define(version: 2020_02_05_221910) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
-  add_foreign_key "contacts", "studios"
-  add_foreign_key "studios", "users"
+  add_foreign_key "contacts", "users"
 end

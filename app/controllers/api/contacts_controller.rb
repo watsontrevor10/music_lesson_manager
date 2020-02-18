@@ -1,17 +1,17 @@
 class Api::ContactsController < ApplicationController
-  before_action :set_studio
+  before_action :authenticate_user!
   before_action :set_contact, only: [:show, :update, :destroy]
 
   def index
-    render json: @studio.contacts
+    render json: current_user.contacts
   end
 
   def show
-    render json: @studio.contacts.find(contact_params)
+    render json: current_user.contacts.find(contact_params)
   end
 
   def create
-    contact = @studio.contacts.new(contact_params)
+    contact = current_user.contacts.new(contact_params)
     if contact.save
       render json: contact
     else
@@ -35,10 +35,6 @@ class Api::ContactsController < ApplicationController
 
   def set_contact
     @contact = Contact.find(params[:id])
-  end
-
-  def set_studio
-    @studio = Studio.find(params[:studio_id])
   end
 
   def contact_params
