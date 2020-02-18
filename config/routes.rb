@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
   
   namespace :api do
+    get 'expenses/index'
+    get 'expenses/show'
+    get 'expenses/create'
+    get 'expenses/update'
+    get 'expenses/destroy'
+  end
+  namespace :api do
     resources :contacts
   end
 
