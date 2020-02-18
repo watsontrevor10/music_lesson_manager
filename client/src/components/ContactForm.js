@@ -44,7 +44,8 @@ const ContactForm = (props) => {
     
   }
 
-  if (props.contact) {
+  if (contact) {
+    // Edit Form
     return (
       <>
         <Form onSubmit={handleSubmit} pad='small'>
@@ -61,7 +62,6 @@ const ContactForm = (props) => {
                 name='first_name'
                 value={first_name}
                 {...first_name}
-                required
                 onChange={handleChange}
               />
               <FormField
@@ -69,7 +69,6 @@ const ContactForm = (props) => {
                 name='last_name'
                 value={last_name}
                 {...last_name}
-                required
                 onChange={handleChange}
               />
               <FormField
@@ -146,6 +145,7 @@ const ContactForm = (props) => {
       </>
     )
   } else {
+    // Add Form
     return (
       <>
       <Form onSubmit={handleSubmit} pad='small'>
