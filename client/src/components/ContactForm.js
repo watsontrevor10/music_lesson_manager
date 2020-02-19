@@ -26,6 +26,7 @@ const ContactForm = (props) => {
     contact_status,
     description,
     amount_per_hour,
+    lesson_duration,
   } = values
 
   function submit() {
@@ -42,6 +43,7 @@ const ContactForm = (props) => {
       contact_type,
       description,
       amount_per_hour,
+      lesson_duration,
     }
 
     if (contact) {
@@ -92,18 +94,7 @@ const ContactForm = (props) => {
                 value={email}
                 {...email}
                 onChange={handleChange}
-              >
-                <MaskedInput
-                  name="email"
-                  mask={[
-                    { regexp: /^[\w\-_.]+$/, placeholder: "example" },
-                    { fixed: "@" },
-                    { regexp: /^[\w]+$/, placeholder: "my" },
-                    { fixed: "." },
-                    { regexp: /^[\w]+$/, placeholder: "com" }
-                  ]}
-                />
-              </FormField>
+              />
               <FormField
                 label='Phone'
                 name='phone'
@@ -116,6 +107,13 @@ const ContactForm = (props) => {
                 name='amount_per_hour'
                 value={amount_per_hour}
                 {...amount_per_hour}
+                onChange={handleChange}
+              />
+              <FormField
+                label='Lesson Duration'
+                name='lesson_duration'
+                value={lesson_duration}
+                {...lesson_duration}
                 onChange={handleChange}
               />
             </Box>
@@ -227,9 +225,14 @@ const ContactForm = (props) => {
                 name='phone'
                 onChange={handleChange}
               />
-               <FormField
+              <FormField
                 label='Cost per Lesson'
                 name='amount_per_hour'
+                onChange={handleChange}
+              />
+              <FormField
+                label='Lesson Duration'
+                name='lesson_duration'
                 onChange={handleChange}
               />
             </Box>

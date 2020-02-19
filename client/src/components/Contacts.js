@@ -82,7 +82,15 @@ const Contacts = () => {
               {
                 property: 'contact_type',
                 header: 'Type',
-              }
+              },
+              {
+                property: 'amount_per_hour',
+                header: 'Cost per Lesson',
+              },
+              {
+                property: 'lesson_duration',
+                header: 'Lesson Duration',
+              },
             ]}
               data={contacts}
               sortable
