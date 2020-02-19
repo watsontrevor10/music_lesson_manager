@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Heading, DataTable, Text, Box, Button, } from 'grommet'
+import { Heading, DataTable, Box, Button, } from 'grommet'
 import ContactForm from './ContactForm'
 
 const Contacts = () => {

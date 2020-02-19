@@ -8,7 +8,6 @@ const Navbar = (props) => {
   const rightNavItems = () => {
     const { auth: { user, handleLogout, }, location, } = props;
 
-
     if (user) {
       return (
         <Header alignSelf='end'>
@@ -56,6 +55,13 @@ const Navbar = (props) => {
             label='Contacts'
             id='contacts'
             active={props.location.pathname === '/contacts'}
+          />
+        </Link>
+        <Link to='/expenses'>
+          <Button
+            label='Expenses'
+            id='expenses'
+            active={props.location.pathname === '/expenses'}
           />
         </Link>
         {rightNavItems()}
