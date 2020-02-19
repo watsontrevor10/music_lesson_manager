@@ -164,13 +164,13 @@ const ContactForm = (props) => {
             </Box>
           </Grid>
           <Button
-            label="Submit"
+            label="Update"
             type='submit'
             value='submit'
           />
           <Button
             label="Cancel"
-            onClick={() => props.add()}
+            onClick={() => props.goBack()}
           />
           <Button
             label="Delete"

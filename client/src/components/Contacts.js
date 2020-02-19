@@ -69,7 +69,7 @@ const Contacts = () => {
   return (
     <>
       {toggleContact ?
-        <Contact contact={contact} goBack={() => toggleContactComp()} />
+        <Contact contact={contact} goBack={toggleContactComp} />
         :
         <Box>
           <Heading level={3}>Contacts</Heading>
@@ -115,6 +115,7 @@ const Contacts = () => {
                   property: 'lesson_duration',
                   header: 'Lesson Duration',
                 },
+                
               ]}
               data={contacts}
               sortable
@@ -123,6 +124,7 @@ const Contacts = () => {
           </Box>
         </Box>
       }
+      {showContactModal()}
     </>
   )
 }
