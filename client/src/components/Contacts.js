@@ -85,6 +85,7 @@ const Contacts = () => {
               }
             ]}
               data={contacts}
+              sortable
               onClickRow={event => toggleContactComp(event.datum)}
             />
           </Box>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Box, Button, Heading, DataTable, Grid, Layer } from 'grommet'
+import { Box, Button, Heading, DataTable, Layer } from 'grommet'
 import ExpenseForm from './ExpenseForm'
 
 const Expenses = () => {
@@ -99,6 +99,7 @@ const Expenses = () => {
               },
             ]}
             data={expenses}
+            sortable
             onClickRow={event => toggleEditForm(event.datum)}
           />
         </Box>
