@@ -57,7 +57,8 @@ const Contacts = () => {
             />
           </Box>
           <Box>
-            <DataTable key={contacts.id} columns={[
+            <DataTable key={contacts.id} 
+            columns={[
               {
                 property: 'first_name',
                 header: 'First Name',

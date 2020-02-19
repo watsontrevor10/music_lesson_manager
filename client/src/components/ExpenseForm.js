@@ -45,64 +45,138 @@ const ExpenseForm = (props) => {
     }
   }
 
-  return (
-    <>
-      <Box>
-        <Heading level={3}>Add Expense</Heading>
-      </Box>
-      <Form onSubmit={handleSubmit} pad='small'>
-        <Grid
-          gap='small'
-        >
-          <Box pad='small'>
-            <FormField label='Expense Category' htmlFor='select'>
-              <Select
-                id='select'
-                name='expense_category'
+  if (expense) {
+    return (
+      <>
+        <Box>
+          <Heading level={3}>Add Expense</Heading>
+        </Box>
+        <Form onSubmit={handleSubmit} pad='small'>
+          <Grid
+            gap='small'
+          >
+            <Box pad='small'>
+              <FormField label='Expense Category' htmlFor='select'>
+                <Select
+                  id='select'
+                  name='expense_category'
+                  required
+                  value={expense_category}
+                  {...expense_category}
+                  onChange={handleSelects}
+                  options={categoryOptions}
+                />
+              </FormField>
+              <FormField
+                label='Amount'
+                name='expense_amount'
+                value={expense_amount}
+                {...expense_amount}
                 required
-                value={expense_category}
-                {...expense_category}
-                onChange={handleSelects}
-                options={categoryOptions}
+                onChange={handleChange}
               />
-            </FormField>
-            <FormField
-              label='Amount'
-              name='expense_amount'
-              required
-              onChange={handleChange}
-            />
-            <FormField
-              label='Date'
-              name='date'
-              onChange={handleChange}
-            />
-            <FormField
-              label='Purpose'
-              name='purpose'
-              onChange={handleChange}
-            />
-            <FormField
-              label='Notes'
-              name='notes'
-              onChange={handleChange}
-            />
-          </Box>
-        </Grid>
-        <Button
-          label='Submit'
-          type='submit'
-          value='submit'
-          gap='small'
-        />
-        <Button
-          label='Cancel'
-          onClick={() => props.toggle()}
-          gap='small'
-        />
-      </Form>
-    </>
-  )
+              <FormField
+                label='Date'
+                name='date'
+                value={date}
+                {...date}
+                onChange={handleChange}
+              />
+              <FormField
+                label='Purpose'
+                name='purpose'
+                value={purpose}
+                {...purpose}
+                onChange={handleChange}
+              />
+              <FormField
+                label='Notes'
+                name='notes'
+                value={notes}
+                {...notes}
+                onChange={handleChange}
+              />
+            </Box>
+          </Grid>
+          <Button
+            label='Submit'
+            type='submit'
+            value='submit'
+            gap='small'
+          />
+          <Button
+            label='Cancel'
+            onClick={() => props.toggle()}
+            gap='small'
+          />
+          <Button
+            label='Delete'
+            onClick={() => props.deleteExpense()}
+            gap='small'
+          />
+        </Form>
+      </>
+    )
+  } else {
+    return (
+      <>
+        <Box>
+          <Heading level={3}>Add Expense</Heading>
+        </Box>
+        <Form onSubmit={handleSubmit} pad='small'>
+          <Grid
+            gap='small'
+          >
+            <Box pad='small'>
+              <FormField label='Expense Category' htmlFor='select'>
+                <Select
+                  id='select'
+                  name='expense_category'
+                  required
+                  value={expense_category}
+                  {...expense_category}
+                  onChange={handleSelects}
+                  options={categoryOptions}
+                />
+              </FormField>
+              <FormField
+                label='Amount'
+                name='expense_amount'
+                required
+                onChange={handleChange}
+              />
+              <FormField
+                label='Date'
+                name='date'
+                onChange={handleChange}
+              />
+              <FormField
+                label='Purpose'
+                name='purpose'
+                onChange={handleChange}
+              />
+              <FormField
+                label='Notes'
+                name='notes'
+                onChange={handleChange}
+              />
+            </Box>
+          </Grid>
+          <Button
+            label='Submit'
+            type='submit'
+            value='submit'
+            gap='small'
+          />
+          <Button
+            label='Cancel'
+            onClick={() => props.toggle()}
+            gap='small'
+          />
+        </Form>
+      </>
+    )
+  }
 }
 
 

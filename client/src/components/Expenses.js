@@ -5,10 +5,16 @@ import ExpenseForm from './ExpenseForm'
 
 const Expenses = () => {
   const [expenses, setExpenses] = useState([])
-  const [addExpense, setAddExpense] = useState(false)
+  const [expense, setExpense] = useState(null)
+  const [expenseForm, setExpenseForm] = useState(false)
 
-  const toggleExpenseForm = () => {
-    setAddExpense(!addExpense)
+  const toggleExpenseForm = (e) => {
+    setExpenseForm(!expenseForm)
+  }
+
+  const toggleEditForm = (e) => {
+    setExpense(e)
+    setExpenseForm(!expenseForm)
   }
 
   useEffect(() => {
@@ -26,8 +32,16 @@ const Expenses = () => {
       })
   }
 
+  const handleDelete = () => {
+    axios.delete(`api/expenses/${expense.id}`)
+      .then(res => {
+        setExpenses(expenses.filter(exp => exp.id !== expense.id))
+        toggleExpenseForm()
+      })
+  }
+
   function showExpenseForm() {
-    if (addExpense) {
+    if (expenseForm) {
       return (
         <Layer
           position='right'
@@ -36,7 +50,12 @@ const Expenses = () => {
           onClickOutside={toggleExpenseForm}
           onEsc={toggleExpenseForm}
         >
-          <ExpenseForm updateExpense={handleUpdateExpenses} toggle={toggleExpenseForm} />
+          <ExpenseForm 
+            updateExpense={handleUpdateExpenses}
+            toggle={toggleExpenseForm} 
+            expense={expense} 
+            deleteExpense={handleDelete}
+          />
         </Layer>
       )
     } 
@@ -80,6 +99,7 @@ const Expenses = () => {
               },
             ]}
             data={expenses}
+            onClickRow={event => toggleEditForm(event.datum)}
           />
         </Box>
       </Box>
