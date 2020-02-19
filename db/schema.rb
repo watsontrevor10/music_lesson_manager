@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_18_201419) do
+ActiveRecord::Schema.define(version: 2020_02_19_194848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2020_02_18_201419) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
+    t.float "amount_per_hour", default: 0.0
     t.index ["user_id"], name: "index_contacts_on_user_id"
   end
 
@@ -42,6 +43,17 @@ ActiveRecord::Schema.define(version: 2020_02_18_201419) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_expenses_on_user_id"
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.bigint "contact_id", null: false
+    t.float "amount"
+    t.date "date_sent"
+    t.date "date_paid"
+    t.text "notes"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["contact_id"], name: "index_invoices_on_contact_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -76,4 +88,5 @@ ActiveRecord::Schema.define(version: 2020_02_18_201419) do
 
   add_foreign_key "contacts", "users"
   add_foreign_key "expenses", "users"
+  add_foreign_key "invoices", "contacts"
 end
