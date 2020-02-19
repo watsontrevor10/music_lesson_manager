@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import useFormInput from '../hooks/useFormInput'
-import { Box, Button, Form, FormField, Heading, Grid, Select, MaskedInput } from 'grommet'
+import { Box, Button, Form, FormField, Heading, Grid, Select, } from 'grommet'
+import DatePicker from 'react-datepicker'
+import "react-datepicker/dist/react-datepicker.css"
 
 const ExpenseForm = (props) => {
   const { values, setValues, handleChange, handleSubmit, handleSelects } = useFormInput(submit)
   const [expense, setExpense] = useState(props.expense ? props.expense : null)
+  const [startDate, setStartDate] = useState(new Date())
   const categoryOptions = ['Travel', 'Materials', 'Recital', 'Other']
 
   useEffect(() => {
@@ -45,6 +48,10 @@ const ExpenseForm = (props) => {
     }
   }
 
+  const handleDateChange = (date) => {
+    setStartDate(date)
+  }
+
   if (expense) {
     return (
       <>
@@ -60,7 +67,6 @@ const ExpenseForm = (props) => {
                 <Select
                   id='select'
                   name='expense_category'
-                  required
                   value={expense_category}
                   {...expense_category}
                   onChange={handleSelects}
@@ -72,7 +78,6 @@ const ExpenseForm = (props) => {
                 name='expense_amount'
                 value={expense_amount}
                 {...expense_amount}
-                required
                 onChange={handleChange}
               />
               <FormField
@@ -87,7 +92,7 @@ const ExpenseForm = (props) => {
                 name='purpose'
                 value={purpose}
                 {...purpose}
-                onChange={handleChange}
+                onChange={handleDateChange}
               />
               <FormField
                 label='Notes'
@@ -99,7 +104,7 @@ const ExpenseForm = (props) => {
             </Box>
           </Grid>
           <Button
-            label='Submit'
+            label='Update'
             type='submit'
             value='submit'
             gap='small'
@@ -148,6 +153,7 @@ const ExpenseForm = (props) => {
               <FormField
                 label='Date'
                 name='date'
+                required
                 onChange={handleChange}
               />
               <FormField
