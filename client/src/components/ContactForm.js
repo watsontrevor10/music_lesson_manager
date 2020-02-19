@@ -25,10 +25,25 @@ const ContactForm = (props) => {
     contact_type,
     contact_status,
     description,
+    amount_per_hour,
   } = values
 
   function submit() {
-    const newContact = { first_name, last_name, phone, email, age, birthdate, parent_name, contact_status, contact_type, description }
+    const newContact =
+    {
+      first_name,
+      last_name,
+      phone,
+      email,
+      age,
+      birthdate,
+      parent_name,
+      contact_status,
+      contact_type,
+      description,
+      amount_per_hour,
+    }
+
     if (contact) {
       axios.patch(`/api/contacts/${contact.id}`, newContact)
         .then(res => {
@@ -94,6 +109,13 @@ const ContactForm = (props) => {
                 name='phone'
                 value={phone}
                 {...phone}
+                onChange={handleChange}
+              />
+              <FormField
+                label='Cost per Lesson'
+                name='amount_per_hour'
+                value={amount_per_hour}
+                {...amount_per_hour}
                 onChange={handleChange}
               />
             </Box>
@@ -203,6 +225,11 @@ const ContactForm = (props) => {
               <FormField
                 label='Phone'
                 name='phone'
+                onChange={handleChange}
+              />
+               <FormField
+                label='Cost per Lesson'
+                name='amount_per_hour'
                 onChange={handleChange}
               />
             </Box>
