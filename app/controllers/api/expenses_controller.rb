@@ -12,7 +12,6 @@ class Api::ExpensesController < ApplicationController
 
   def create
     expense = current_user.expenses.new(expense_params)
-    binding.pry
     if expense.save
       render json: expense
     else

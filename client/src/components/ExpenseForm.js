@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import useFormInput from '../hooks/useFormInput'
-import { Box, Button, Form, FormField, Heading, Grid, Select, } from 'grommet'
+import { Box, Button, Form, FormField, Heading, Grid, Select, MaskedInput } from 'grommet'
 
 const ExpenseForm = (props) => {
   const { values, setValues, handleChange, handleSubmit, handleSelects } = useFormInput(submit)
@@ -41,6 +41,7 @@ const ExpenseForm = (props) => {
       axios.post('/api/expenses', newExpense)
         .then(res => {
           props.updateExpense()
+          setValues({})
         })
     }
   }
@@ -76,7 +77,37 @@ const ExpenseForm = (props) => {
               label='Date'
               name='date'
               onChange={handleChange}
-            />
+            >
+              <MaskedInput
+                mask={[
+                  {
+                    length: [1, 2],
+                    options: Array.from({ length: 12 }, (v, k) => k + 1),
+                    regexp: /^1[0,1-2]$|^0?[1-9]$|^0$/,
+                    placeholder: "mm"
+                  },
+                  { fixed: "/" },
+                  {
+                    length: [1, 2],
+                    options: Array.from(
+                      {
+                        length: daysInMonth(parseInt(value.split("/")[0], 10))
+                      },
+                      (v, k) => k + 1
+                    ),
+                    regexp: /^[1-2][0-9]$|^3[0-1]$|^0?[1-9]$|^0$/,
+                    placeholder: "dd"
+                  },
+                  { fixed: "/" },
+                  {
+                    length: 4,
+                    options: Array.from({ length: 100 }, (v, k) => 2019 - k),
+                    regexp: /^[1-2]$|^19$|^20$|^19[0-9]$|^20[0-9]$|^19[0-9][0-9]$|^20[0-9][0-9]$/,
+                    placeholder: "yyyy"
+                  }
+                ]}
+              />
+            </FormField>
             <FormField
               label='Purpose'
               name='purpose'
