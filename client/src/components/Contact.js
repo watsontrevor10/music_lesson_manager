@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Box, Button, Heading, Layer, } from 'grommet'
+import { Box, Button, Grid, Heading, Layer, } from 'grommet'
 import ContactForm from './ContactForm'
+import Invoices from './Invoices'
 
 const Contact = (props) => {
   const [invoices, setInvoices] = useState([])
@@ -21,28 +22,26 @@ const Contact = (props) => {
     lesson_duration,
   } = props.contact
 
-  useEffect(() => {
-    axios.get(`/api/contacts/${props.contact.id}/invoices`)
-      .then(res => {
-        setInvoices(res.data)
-      })
-  }, [])
 
   return (
     <>
-      <Box>
-        <Button
-          label='Back'
-          onClick={props.goBack}
-        />
-      </Box>
-      <Box>
-        <Heading level={3}>{first_name} {last_name}</Heading>
-        <ContactForm 
-          contact={props.contact}
-          goBack={props.goBack}
-        />
-      </Box>   
+      <Grid
+        columns={{
+          size: 'auto',
+          count: 2
+        }}
+      >
+        <Box>
+          <ContactForm
+            contact={props.contact}
+            goBack={props.goBack}
+          />
+        </Box>
+        <Box>
+          <Heading>Invoices</Heading>
+          <Invoices contact={props.contact} /> 
+        </Box>
+      </Grid>
     </>
   )
 }

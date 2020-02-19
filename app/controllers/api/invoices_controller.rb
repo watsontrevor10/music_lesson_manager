@@ -1,8 +1,9 @@
 class Api::InvoicesController < ApplicationController
+  before_action :set_contact
   before_action :set_invoice, only: [:show, :update, :destroy]
 
   def index
-    render json: @contact.invoices 
+    render json: @contact.invoices
   end
 
   def show
