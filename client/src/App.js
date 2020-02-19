@@ -1,5 +1,6 @@
 import React, { Fragment, } from 'react'
 import Contacts from './components/Contacts'
+import Contact from './components/Contact'
 import Home from './components/Home'
 import NoMatch from './components/NoMatch'
 import Navbar from './components/Navbar'
@@ -21,6 +22,7 @@ const App = () => {
           <Switch>
             <ProtectedRoute exact path="/" component={Home} />
             <ProtectedRoute exact path="/contacts" component={Contacts} />
+            <ProtectedRoute exact path="/contacts/:id" component={Contact} />
             <ProtectedRoute exact path="/expenses" component={Expenses} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />

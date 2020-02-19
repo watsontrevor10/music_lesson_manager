@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Heading, DataTable, Box, Button, } from 'grommet'
+import { Link } from 'react-router-dom'
+import { Heading, DataTable, Box, Button, Layer } from 'grommet'
 import ContactForm from './ContactForm'
+import Contact from './Contact'
 
 const Contacts = () => {
   const [contacts, setContacts] = useState([])
   const [contact, setContact] = useState(null)
   const [showContactForm, setShowContactForm] = useState(false)
+  const [toggleContact, setToggleContact] = useState(false)
 
   useEffect(() => {
     axios.get(`/api/contacts`)
@@ -39,13 +42,34 @@ const Contacts = () => {
 
   const toggleContactComp = (e) => {
     setContact(e)
-    setShowContactForm(!showContactForm)
+    setToggleContact(!toggleContact)
+  }
+
+  function showContactModal() {
+    if (showContactForm) {
+      return (
+        <Layer
+          position='right'
+          full='vertical'
+          modal
+          onClickOutside={toggleContactForm}
+          onEsc={toggleContactForm}
+        >
+          <ContactForm 
+            toggleForm={toggleContactForm} 
+            add={handleRefreshContacts} 
+            delete={handleDelete} 
+            contact={contact} 
+          />
+        </Layer>
+      )
+    }
   }
 
   return (
     <>
-      {showContactForm ?
-        <ContactForm toggleForm={toggleContactForm} add={handleRefreshContacts} delete={handleDelete} contact={contact} />
+      {toggleContact ?
+        <Contact contact={contact} goBack={() => toggleContactComp()} />
         :
         <Box>
           <Heading level={3}>Contacts</Heading>
@@ -57,41 +81,41 @@ const Contacts = () => {
             />
           </Box>
           <Box>
-            <DataTable key={contacts.id} 
-            columns={[
-              {
-                property: 'first_name',
-                header: 'First Name',
-              },
-              {
-                property: 'last_name',
-                header: 'Last Name',
-              },
-              {
-                property: 'email',
-                header: 'Email',
-              },
-              {
-                property: 'phone',
-                header: 'Phone',
-              },
-              {
-                property: 'contact_status',
-                header: 'Status',
-              },
-              {
-                property: 'contact_type',
-                header: 'Type',
-              },
-              {
-                property: 'amount_per_hour',
-                header: 'Cost per Lesson',
-              },
-              {
-                property: 'lesson_duration',
-                header: 'Lesson Duration',
-              },
-            ]}
+            <DataTable key={contacts.id}
+              columns={[
+                {
+                  property: 'first_name',
+                  header: 'First Name',
+                },
+                {
+                  property: 'last_name',
+                  header: 'Last Name',
+                },
+                {
+                  property: 'email',
+                  header: 'Email',
+                },
+                {
+                  property: 'phone',
+                  header: 'Phone',
+                },
+                {
+                  property: 'contact_status',
+                  header: 'Status',
+                },
+                {
+                  property: 'contact_type',
+                  header: 'Type',
+                },
+                {
+                  property: 'amount_per_hour',
+                  header: 'Cost per Lesson',
+                },
+                {
+                  property: 'lesson_duration',
+                  header: 'Lesson Duration',
+                },
+              ]}
               data={contacts}
               sortable
               onClickRow={event => toggleContactComp(event.datum)}
