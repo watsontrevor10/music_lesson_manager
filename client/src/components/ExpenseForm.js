@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import useFormInput from '../hooks/useFormInput'
 import { Box, Button, Form, FormField, Heading, Grid, Select, } from 'grommet'
+import DatePicker from 'react-datepicker'
+import "react-datepicker/dist/react-datepicker.css"
 
 const ExpenseForm = (props) => {
   const { values, setValues, handleChange, handleSubmit, handleSelects } = useFormInput(submit)
   const [expense, setExpense] = useState(props.expense ? props.expense : null)
+  const [startDate, setStartDate] = useState(new Date())
   const categoryOptions = ['Travel', 'Materials', 'Recital', 'Other']
 
   useEffect(() => {
@@ -43,6 +46,10 @@ const ExpenseForm = (props) => {
           props.updateExpense()
         })
     }
+  }
+
+  const handleDateChange = (date) => {
+    setStartDate(date)
   }
 
   if (expense) {
@@ -85,7 +92,7 @@ const ExpenseForm = (props) => {
                 name='purpose'
                 value={purpose}
                 {...purpose}
-                onChange={handleChange}
+                onChange={handleDateChange}
               />
               <FormField
                 label='Notes'
