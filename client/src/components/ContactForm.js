@@ -1,7 +1,7 @@
 import React, { useState, useEffect, } from 'react'
 import axios from 'axios'
 import useFormInput from '../hooks/useFormInput'
-import { Box, Button, Form, FormField, Grid, Select } from 'grommet'
+import { Box, Button, Form, FormField, Grid, Select, MaskedInput } from 'grommet'
 
 const ContactForm = (props) => {
   const { values, setValues, handleChange, handleSubmit, handleSelects } = useFormInput(submit)
@@ -77,7 +77,18 @@ const ContactForm = (props) => {
                 value={email}
                 {...email}
                 onChange={handleChange}
-              />
+              >
+                <MaskedInput
+                  name="email"
+                  mask={[
+                    { regexp: /^[\w\-_.]+$/, placeholder: "example" },
+                    { fixed: "@" },
+                    { regexp: /^[\w]+$/, placeholder: "my" },
+                    { fixed: "." },
+                    { regexp: /^[\w]+$/, placeholder: "com" }
+                  ]}
+                />
+              </FormField>
               <FormField
                 label='Phone'
                 name='phone'
@@ -177,7 +188,18 @@ const ContactForm = (props) => {
                 label='Email'
                 name='email'
                 onChange={handleChange}
-              />
+              >
+                <MaskedInput
+                  name="email"
+                  mask={[
+                    { regexp: /^[\w\-_.]+$/, placeholder: "example" },
+                    { fixed: "@" },
+                    { regexp: /^[\w]+$/, placeholder: "my" },
+                    { fixed: "." },
+                    { regexp: /^[\w]+$/, placeholder: "com" }
+                  ]}
+                />
+              </FormField>
               <FormField
                 label='Phone'
                 name='phone'
