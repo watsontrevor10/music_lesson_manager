@@ -5,23 +5,6 @@ import ContactForm from './ContactForm'
 import Invoices from './Invoices'
 
 const Contact = (props) => {
-  const [invoices, setInvoices] = useState([])
-
-  const {
-    first_name,
-    last_name,
-    phone,
-    email,
-    age,
-    birthdate,
-    parent_name,
-    contact_type,
-    contact_status,
-    description,
-    amount_per_hour,
-    lesson_duration,
-  } = props.contact
-
 
   return (
     <>
@@ -34,12 +17,15 @@ const Contact = (props) => {
         <Box pad='medium'>
           <ContactForm
             contact={props.contact}
+            delete={props.delete}
             goBack={props.goBack}
+            toggle={props.toggleContact}
+            refreshContacts={props.refreshContacts}
+            // toggleForm={props.toggleForm}
           />
         </Box>
         <Box pad='medium'>
-          <Heading>Invoices</Heading>
-          <Invoices contact={props.contact} /> 
+          <Invoices contact={props.contact} />
         </Box>
       </Grid>
     </>

@@ -53,6 +53,7 @@ const InvoiceForm = (props) => {
             <FormField
               label='Amount'
               name='amount'
+              type='currency'
               value={amount}
               {...amount}
               onChange={handleChange}
@@ -60,6 +61,7 @@ const InvoiceForm = (props) => {
             <FormField
               label='Date Sent'
               name='date_sent'
+              type='date'
               value={date_sent}
               {...date_sent}
               onChange={handleChange}
@@ -67,6 +69,7 @@ const InvoiceForm = (props) => {
             <FormField
               label='Date Paid'
               name='date_paid'
+              type='date'
               value={date_paid}
               {...date_paid}
               onChange={handleChange}
@@ -116,11 +119,13 @@ const InvoiceForm = (props) => {
             <FormField
               label='Date Sent'
               name='date_sent'
+              type='date'
               onChange={handleChange}
             />
             <FormField
               label='Date Paid'
               name='date_paid'
+              type='date'
               onChange={handleChange}
             />
             <FormField

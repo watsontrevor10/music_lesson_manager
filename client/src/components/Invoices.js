@@ -65,6 +65,8 @@ const Invoices = (props) => {
         {invoices.map(invoice => (
           <Box
             pad='large'
+            gap='small'
+            round
             background={{ color: "light-2", opacity: "strong" }}
           >
             <Heading level={4}>{invoice.amount}</Heading>
@@ -73,6 +75,7 @@ const Invoices = (props) => {
             <p>{invoice.notes}</p>
             <Button
               label='Edit'
+              justify='center'
               onClick={() => toggleInvoiceModal(invoice)}
             />
           </Box>

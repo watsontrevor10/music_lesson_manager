@@ -23,7 +23,7 @@ const Contacts = () => {
       .then(res => {
         setContacts(res.data)
         setContact(null)
-        toggleContactForm()
+        toggleContactComp()
       })
   }
 
@@ -31,7 +31,7 @@ const Contacts = () => {
     axios.delete(`/api/contacts/${contact.id}`)
       .then(res => {
         setContacts(contacts.filter(c => c.id !== contact.id))
-        toggleContactForm()
+        toggleContactComp()
       })
   }
 
@@ -54,11 +54,10 @@ const Contacts = () => {
           onClickOutside={toggleContactForm}
           onEsc={toggleContactForm}
         >
-          <ContactForm 
-            toggleForm={toggleContactForm} 
-            add={handleRefreshContacts} 
-            delete={handleDelete} 
-            contact={contact} 
+          <ContactForm
+            toggleForm={toggleContactForm}
+            refreshContacts={handleRefreshContacts}
+            contact={contact}
           />
         </Layer>
       )
@@ -68,7 +67,13 @@ const Contacts = () => {
   return (
     <>
       {toggleContact ?
-        <Contact contact={contact} goBack={toggleContactComp} />
+        <Contact
+          contact={contact}
+          delete={handleDelete}
+          toggleContact={toggleContactComp}
+          goBack={toggleContactComp}
+          refreshContacts={handleRefreshContacts}
+        />
         :
         <Box>
           <Heading level={3}>Contacts</Heading>
@@ -114,7 +119,7 @@ const Contacts = () => {
                   property: 'lesson_duration',
                   header: 'Lesson Duration',
                 },
-                
+
               ]}
               data={contacts}
               sortable

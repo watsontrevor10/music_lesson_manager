@@ -76,6 +76,7 @@ const ExpenseForm = (props) => {
               <FormField
                 label='Amount'
                 name='expense_amount'
+                type='currency'
                 value={expense_amount}
                 {...expense_amount}
                 onChange={handleChange}
