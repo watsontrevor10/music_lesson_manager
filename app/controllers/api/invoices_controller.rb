@@ -12,7 +12,7 @@ class Api::InvoicesController < ApplicationController
 
   def create
     invoice = @contact.invoices.new(invoice_params)
-    if expense.save
+    if invoice.save
       render json: invoice
     else
       render json: invoice.errors, status: 422

@@ -31,13 +31,13 @@ const Contact = (props) => {
           count: 2
         }}
       >
-        <Box>
+        <Box pad='medium'>
           <ContactForm
             contact={props.contact}
             goBack={props.goBack}
           />
         </Box>
-        <Box>
+        <Box pad='medium'>
           <Heading>Invoices</Heading>
           <Invoices contact={props.contact} /> 
         </Box>
