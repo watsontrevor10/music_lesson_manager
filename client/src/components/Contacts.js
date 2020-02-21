@@ -76,8 +76,8 @@ const Contacts = () => {
         />
         :
         <Box>
-          <Heading level={3}>Contacts</Heading>
-          <Box as='header'>
+          <Heading level={2} alignSelf='center'>Contacts</Heading>
+          <Box direction='row-responsive' gap='small'>
             <Button
               label='Add Contact'
               gap='small'

@@ -66,7 +66,7 @@ const ContactForm = (props) => {
     // Edit Form
     return (
       <>
-        <Box>
+        <Box gap='small'>
           <Form onSubmit={handleSubmit} pad='medium'>
             <Grid
               columns={{
@@ -177,19 +177,25 @@ const ContactForm = (props) => {
                 />
               </Box>
             </Grid>
-            <Button
-              label="Update"
-              type='submit'
-              value='submit'
-            />
-            <Button
-              label="Back"
-              onClick={() => props.refreshContacts()}
-            />
-            <Button
-              label="Delete"
-              onClick={() => props.delete()}
-            />
+            <Box gap='small' direction='row-responsive'>
+              <Button
+                label="Update"
+                type='submit'
+                value='submit'
+                size='small'
+              />
+              <Button
+                label="Back"
+                onClick={() => props.refreshContacts()}
+                size='small'
+              />
+              <Button
+                label="Delete"
+                size='small'
+                onClick={() => props.delete()}
+              />
+
+            </Box>
           </Form>
         </Box>
       </>

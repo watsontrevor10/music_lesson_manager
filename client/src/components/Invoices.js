@@ -55,24 +55,25 @@ const Invoices = (props) => {
 
   return (
     <>
-      <Box>
+      <Box pad='medium' gap='small'>
         <Button
           label='Add Invoice'
+          fill='false'
           onClick={toggleAddForm}
         />
       </Box>
-      <Box direction='row-responsive'>
+      <Box direction='row-responsive' gap='small'>
         {invoices.map(invoice => (
           <Box
             pad='large'
-            gap='small'
+            elevation='small'
             round
-            background={{ color: "light-2", opacity: "strong" }}
+            background={{ color: "light-3", opacity: "strong" }}
           >
-            <Heading level={4}>{invoice.amount}</Heading>
-            <p>{invoice.date_sent}</p>
-            <p>{invoice.date_paid}</p>
-            <p>{invoice.notes}</p>
+            <Heading level={4}>Invoice Amount: {invoice.amount}</Heading>
+            <p>Date Sent: {invoice.date_sent}</p>
+            <p>Date Paid: {invoice.date_paid}</p>
+            <p>Notes: {invoice.notes}</p>
             <Button
               label='Edit'
               justify='center'
