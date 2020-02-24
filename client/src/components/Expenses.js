@@ -81,6 +81,7 @@ const Expenses = () => {
                 property: 'expense_category',
                 header: 'Expense Type',
                 search: true,
+                footer: { 'aggregate': true },
               },
               {
                 property: 'expense_amount',
