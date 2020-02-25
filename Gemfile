@@ -27,6 +27,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'devise_token_auth'
 
+gem 'google-api-client', '~> 0.34'
+
 group :development, :test do
   # Call 'binding.pry' anywhere in the code to stop execution and get a debugger console
   gem 'pry-rails', platforms: [:mri, :mingw, :x64_mingw]
