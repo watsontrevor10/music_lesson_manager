@@ -1,6 +1,6 @@
 import React from 'react'
 import { AuthConsumer, } from "../providers/AuthProvider";
-import { Header, Button } from 'grommet'
+import { Header, Box, Button } from 'grommet'
 import { Link, withRouter, } from 'react-router-dom'
 
 const Navbar = (props) => {
@@ -10,7 +10,7 @@ const Navbar = (props) => {
 
     if (user) {
       return (
-        <Header alignSelf='end'>
+        <Header alignSelf='end' justify='end'>
           <Button
             id='logout'
             label='Logout'
@@ -20,7 +20,7 @@ const Navbar = (props) => {
       )
     } else {
       return (
-        <Header alignSelf='start'>
+        <Header>
           <Link to='/login'>
             <Button
               id='login'
@@ -42,29 +42,33 @@ const Navbar = (props) => {
 
   return (
     <div>
-      <Header pointing secondary>
-        <Link to='/'>
-          <Button
-            label='Home'
-            id='home'
-            active={props.location.pathname === '/'}
-          />
-        </Link>
-        <Link to='/contacts'>
-          <Button
-            label='Contacts'
-            id='contacts'
-            active={props.location.pathname === '/contacts'}
-          />
-        </Link>
-        <Link to='/expenses'>
-          <Button
-            label='Expenses'
-            id='expenses'
-            active={props.location.pathname === '/expenses'}
-          />
-        </Link>
-        {rightNavItems()}
+      <Header pointing secondary alignSelf='start'>
+        <Box direction='row-responsive' gap='small'>
+          <Link to='/'>
+            <Button
+              label='Home'
+              id='home'
+              active={props.location.pathname === '/'}
+            />
+          </Link>
+          <Link to='/contacts'>
+            <Button
+              label='Contacts'
+              id='contacts'
+              active={props.location.pathname === '/contacts'}
+            />
+          </Link>
+          <Link to='/expenses'>
+            <Button
+              label='Expenses'
+              id='expenses'
+              active={props.location.pathname === '/expenses'}
+            />
+          </Link>
+        </Box>
+        <Box>
+          {rightNavItems()}
+        </Box>
       </Header>
     </div>
   )

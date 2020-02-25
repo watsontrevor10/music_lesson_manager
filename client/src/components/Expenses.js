@@ -50,22 +50,22 @@ const Expenses = () => {
           onClickOutside={toggleExpenseForm}
           onEsc={toggleExpenseForm}
         >
-          <ExpenseForm 
+          <ExpenseForm
             updateExpense={handleUpdateExpenses}
-            toggle={toggleExpenseForm} 
-            expense={expense} 
+            toggle={toggleExpenseForm}
+            expense={expense}
             deleteExpense={handleDelete}
           />
         </Layer>
       )
-    } 
+    }
   }
 
   return (
     <>
       <Box>
-        <Box>
-          <Heading level={3}>Expenses</Heading>
+        <Heading level={2} alignSelf='center'>Expenses</Heading>
+        <Box direction='row-responsive' gap='small'>
           <Button
             label='Add Expense'
             onClick={toggleExpenseForm}
@@ -80,10 +80,14 @@ const Expenses = () => {
               {
                 property: 'expense_category',
                 header: 'Expense Type',
+                search: true,
+                footer: { 'aggregate': true },
               },
               {
                 property: 'expense_amount',
                 header: 'Amount',
+                footer: { 'aggegrate': true },
+                aggregate: 'sum',
               },
               {
                 property: 'date',

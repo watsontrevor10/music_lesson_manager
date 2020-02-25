@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Heading, DataTable, Box, Button, } from 'grommet'
+import { Heading, DataTable, Box, Button, Layer } from 'grommet'
 import ContactForm from './ContactForm'
+import Contact from './Contact'
 
 const Contacts = () => {
   const [contacts, setContacts] = useState([])
   const [contact, setContact] = useState(null)
   const [showContactForm, setShowContactForm] = useState(false)
+  const [toggleContact, setToggleContact] = useState(false)
 
   useEffect(() => {
     axios.get(`/api/contacts`)
@@ -21,7 +23,7 @@ const Contacts = () => {
       .then(res => {
         setContacts(res.data)
         setContact(null)
-        toggleContactForm()
+        toggleContactComp()
       })
   }
 
@@ -29,7 +31,7 @@ const Contacts = () => {
     axios.delete(`/api/contacts/${contact.id}`)
       .then(res => {
         setContacts(contacts.filter(c => c.id !== contact.id))
-        toggleContactForm()
+        toggleContactComp()
       })
   }
 
@@ -39,17 +41,43 @@ const Contacts = () => {
 
   const toggleContactComp = (e) => {
     setContact(e)
-    setShowContactForm(!showContactForm)
+    setToggleContact(!toggleContact)
+  }
+
+  function showContactModal() {
+    if (showContactForm) {
+      return (
+        <Layer
+          position='right'
+          full='vertical'
+          modal
+          onClickOutside={toggleContactForm}
+          onEsc={toggleContactForm}
+        >
+          <ContactForm
+            toggleForm={toggleContactForm}
+            refreshContacts={handleRefreshContacts}
+            contact={contact}
+          />
+        </Layer>
+      )
+    }
   }
 
   return (
     <>
-      {showContactForm ?
-        <ContactForm toggleForm={toggleContactForm} add={handleRefreshContacts} delete={handleDelete} contact={contact} />
+      {toggleContact ?
+        <Contact
+          contact={contact}
+          delete={handleDelete}
+          toggleContact={toggleContactComp}
+          goBack={toggleContactComp}
+          refreshContacts={handleRefreshContacts}
+        />
         :
         <Box>
-          <Heading level={3}>Contacts</Heading>
-          <Box as='header'>
+          <Heading level={2} alignSelf='center'>Contacts</Heading>
+          <Box direction='row-responsive' gap='small'>
             <Button
               label='Add Contact'
               gap='small'
@@ -57,33 +85,42 @@ const Contacts = () => {
             />
           </Box>
           <Box>
-            <DataTable key={contacts.id} 
-            columns={[
-              {
-                property: 'first_name',
-                header: 'First Name',
-              },
-              {
-                property: 'last_name',
-                header: 'Last Name',
-              },
-              {
-                property: 'email',
-                header: 'Email',
-              },
-              {
-                property: 'phone',
-                header: 'Phone',
-              },
-              {
-                property: 'contact_status',
-                header: 'Status',
-              },
-              {
-                property: 'contact_type',
-                header: 'Type',
-              }
-            ]}
+            <DataTable key={contacts.id}
+              columns={[
+                {
+                  property: 'first_name',
+                  header: 'First Name',
+                },
+                {
+                  property: 'last_name',
+                  header: 'Last Name',
+                },
+                {
+                  property: 'email',
+                  header: 'Email',
+                },
+                {
+                  property: 'phone',
+                  header: 'Phone',
+                },
+                {
+                  property: 'contact_status',
+                  header: 'Status',
+                },
+                {
+                  property: 'contact_type',
+                  header: 'Type',
+                },
+                {
+                  property: 'amount_per_hour',
+                  header: 'Cost per Lesson',
+                },
+                {
+                  property: 'lesson_duration',
+                  header: 'Lesson Duration',
+                },
+
+              ]}
               data={contacts}
               sortable
               onClickRow={event => toggleContactComp(event.datum)}
@@ -91,6 +128,7 @@ const Contacts = () => {
           </Box>
         </Box>
       }
+      {showContactModal()}
     </>
   )
 }

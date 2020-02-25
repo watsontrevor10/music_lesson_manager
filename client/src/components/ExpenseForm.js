@@ -76,6 +76,7 @@ const ExpenseForm = (props) => {
               <FormField
                 label='Amount'
                 name='expense_amount'
+                type='number'
                 value={expense_amount}
                 {...expense_amount}
                 onChange={handleChange}
@@ -83,6 +84,7 @@ const ExpenseForm = (props) => {
               <FormField
                 label='Date'
                 name='date'
+                type='date'
                 value={date}
                 {...date}
                 onChange={handleChange}
@@ -103,22 +105,25 @@ const ExpenseForm = (props) => {
               />
             </Box>
           </Grid>
-          <Button
-            label='Update'
-            type='submit'
-            value='submit'
-            gap='small'
-          />
-          <Button
-            label='Cancel'
-            onClick={() => props.toggle()}
-            gap='small'
-          />
-          <Button
-            label='Delete'
-            onClick={() => props.deleteExpense()}
-            gap='small'
-          />
+          <Box direction='row-responsive' gap='small'>
+            <Button
+              label='Update'
+              type='submit'
+              value='submit'
+              gap='small'
+            />
+            <Button
+              label='Cancel'
+              onClick={() => props.toggle()}
+              gap='small'
+            />
+            <Button
+              label='Delete'
+              onClick={() => props.deleteExpense()}
+              gap='small'
+            />
+
+          </Box>
         </Form>
       </>
     )
@@ -168,17 +173,19 @@ const ExpenseForm = (props) => {
               />
             </Box>
           </Grid>
-          <Button
-            label='Submit'
-            type='submit'
-            value='submit'
-            gap='small'
-          />
-          <Button
-            label='Cancel'
-            onClick={() => props.toggle()}
-            gap='small'
-          />
+          <Box direction='row-responsive' gap='small' pad='small'>
+            <Button
+              label='Submit'
+              type='submit'
+              value='submit'
+              gap='small'
+            />
+            <Button
+              label='Cancel'
+              onClick={() => props.toggle()}
+              gap='small'
+            />
+          </Box>
         </Form>
       </>
     )

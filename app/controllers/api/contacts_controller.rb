@@ -3,7 +3,7 @@ class Api::ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :update, :destroy]
 
   def index
-    render json: current_user.contacts
+    render json: current_user.contacts.order(:first_name)
   end
 
   def show
@@ -49,7 +49,9 @@ class Api::ContactsController < ApplicationController
         :parent_name, 
         :contact_status, 
         :contact_type, 
-        :description
+        :description,
+        :amount_per_hour,
+        :lesson_duration,
       ])
   end
 end

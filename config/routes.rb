@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   
+  
   namespace :api do
-    resources :contacts
+    resources :contacts do 
+      resources :invoices
+    end
     resources :expenses
   end
 
