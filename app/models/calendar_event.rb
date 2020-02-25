@@ -1,3 +1,3 @@
 class CalendarEvent < ApplicationRecord
-  belongs_to :contacts
+  belongs_to :contact
 end
