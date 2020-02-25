@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_19_201204) do
+ActiveRecord::Schema.define(version: 2020_02_24_233311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "calendar_events", force: :cascade do |t|
+    t.bigint "contacts_id", null: false
+    t.string "subject"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.text "description"
+    t.string "location"
+    t.string "type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["contacts_id"], name: "index_calendar_events_on_contacts_id"
+  end
 
   create_table "contacts", force: :cascade do |t|
     t.string "first_name"
@@ -87,6 +100,7 @@ ActiveRecord::Schema.define(version: 2020_02_19_201204) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "calendar_events", "contacts", column: "contacts_id"
   add_foreign_key "contacts", "users"
   add_foreign_key "expenses", "users"
   add_foreign_key "invoices", "contacts"
